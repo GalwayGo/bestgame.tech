@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BestGame.tech - Play Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .game-iframe {
+            flex-grow: 1;
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-indigo-100 text-gray-800 font-sans">
+
+    <!-- Header -->
+    <header class="container mx-auto px-4 py-6 flex justify-between items-center">
+        <div class="text-2xl font-bold text-indigo-700">BestGame.tech</div>
+        <nav class="space-x-8 hidden md:block">
+            <a href="index.html#all-games" class="text-gray-600 hover:text-indigo-700 transition duration-300">Games</a>
+            <a href="index.html#featured-games" class="text-gray-600 hover:text-indigo-700 transition duration-300">Featured</a>
+            <a href="index.html#about" class="text-gray-600 hover:text-indigo-700 transition duration-300">About</a>
+        </nav>
+    </header>
+
+    <!-- Game Container -->
+    <main class="container mx-auto px-4 py-8 flex-grow flex flex-col items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-5xl h-[80vh] flex flex-col">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 id="game-title" class="text-2xl font-bold text-gray-900">Loading Game...</h2>
+                <button onclick="window.history.back()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-full transition duration-300">Back</button>
+            </div>
+            <div class="flex-grow overflow-hidden">
+                <iframe id="game-iframe" class="game-iframe" allow="autoplay; fullscreen; gamepads;" frameborder="0"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 px-4 text-center mt-auto">
+        <div class="container mx-auto">
+            <div class="text-xl font-bold text-indigo-400 mb-4">BestGame.tech</div>
+            <p class="mb-2">Your destination for online gaming excellence</p>
+            <p class="text-sm">© 2025 BestGame.tech • 1000 Premium Games • Forever Free</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const game = urlParams.get('game');
+            const gameIframe = document.getElementById('game-iframe');
+            const gameTitle = document.getElementById('game-title');
+
+            const gameUrls = {
+                'space_invaders': { url: 'https://susam.net/invaders.html', title: 'Space Invaders Classic' },
+                'pacman': { url: 'https://www.echalk.co.uk/amusements/Games/Pacman/pacman.html', title: 'Pac-Man' },
+                'tetris': { url: 'https://chvin.github.io/react-tetris/', title: 'Tetris' },
+                'snake': { url: 'https://www.echalk.co.uk/amusements/Games/snake/snake.html', title: 'Snake' },
+                'solitaire': { url: 'https://playpager.com/embed/solitaire/index.html', title: 'Solitaire' },
+                'mini_chess': { url: 'https://playpager.com/embed/minichess/index.html', title: 'Mini Chess' },
+                'reversi': { url: 'https://playpager.com/embed/reversi/index.html', title: 'Reversi' },
+                'checkers': { url: 'https://playpager.com/embed/minicheckers/index.html', title: 'Checkers' }
+            };
+
+            if (game && gameUrls[game]) {
+                gameIframe.src = gameUrls[game].url;
+                gameTitle.textContent = gameUrls[game].title;
+            } else {
+                gameIframe.src = ''; // No game found or invalid game
+                gameTitle.textContent = 'Game Not Found';
+            }
+        });
+    </script>
+</body>
+</html>
