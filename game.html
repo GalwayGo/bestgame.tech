@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BestGame.tech - Play Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #game-iframe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-800 font-sans">
+    <iframe
+        id="game-iframe"
+        src=""
+        allow="autoplay; fullscreen; gamepads;"
+        frameborder="0"
+    ></iframe>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const game = urlParams.get('game');
+            const gameIframe = document.getElementById('game-iframe');
+            const gameUrls = {
+                'space_invaders': { url: 'https://susam.net/invaders.html', title: 'Space Invaders Classic' },
+                'pacman': { url: 'https://www.echalk.co.uk/amusements/Games/Pacman/pacman.html', title: 'Pac-Man' },
+                'tetris': { url: 'https://www.retrogames.cc/embed/43806-super-mario-bros-simplified.html', title: 'Super Mario Bros. Simplified' },
+                'snake': { url: 'https://www.echalk.co.uk/amusements/Games/snake/snake.html', title: 'Snake' },
+                'solitaire': { url: 'https://playpager.com/embed/solitaire/index.html', title: 'Solitaire' },
+                'mini_chess': { url: 'https://playpager.com/embed/minichess/index.html', title: 'Mini Chess' },
+                'reversi': { url: 'https://playpager.com/embed/reversi/index.html', title: 'Reversi' },
+                'checkers': { url: 'https://playpager.com/embed/minicheckers/index.html', title: 'Checkers' }
+            };
+            if (game && gameUrls[game]) {
+                gameIframe.src = gameUrls[game].url;
+            } else {
+                gameIframe.src = '';
+                alert('Game Not Found');
+            }
+        });
+    </script>
+</body>
+</html>
